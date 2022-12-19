@@ -33,8 +33,17 @@ The goal is to set up a small infrastructure composed of different services unde
 - Adminer
 - Service of your choice: Borg Backup
 
-
 # Example for a digram of the expected infrastructure
 <img width="492" alt="Screenshot 2022-12-19 at 17 02 57" src="https://user-images.githubusercontent.com/82594855/208468278-bc7bf737-e546-4900-b96c-4f23f185026d.png"> [^1]
+
+## Usage
+- Set up an OS with GUI on a VM
+- On the VM:
+  - Clone this repo
+  - Run `make` in the root of the cloned repository
+  - Browse to https://mstrantz.42.fr (accept risks, due to unsigned SSL certificate)
+  - Admin access to the WordPress website via `https://mstrantz.42.fr/wp-admin`, use the credentials provided by the .env file
+  - Run `make down` to shut down the containers or
+  - Run `make fclean` to clear the whole environment of the infrastructure
 
 [^1]: taken from the subject pdf
