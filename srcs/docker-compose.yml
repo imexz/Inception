@@ -1,0 +1,145 @@
+version: '3'
+
+networks:
+    docker-network:
+
+services:
+
+  wordpress:
+    build:
+        context: ./requirements/wordpress/
+        dockerfile: Dockerfile
+    image: wordpress
+    container_name: wordpress_container
+    depends_on:
+        - db
+    restart: always
+    env_file: .env
+    volumes:
+        - wp_data:/var/www/
+    networks:
+        - docker-network
+  
+  db:
+    build:
+        context: ./requirements/mariadb/
+        dockerfile: Dockerfile
+    image: db
+    container_name: mariadb_container
+    restart: always
+    env_file: .env
+    volumes:
+       - db_data:/var/lib/mysql
+    networks:
+        - docker-network
+  
+  nginx:
+    build:
+        context: ./requirements/nginx/
+        dockerfile: Dockerfile
+    image: nginx
+    container_name: nginx_container
+    depends_on:
+         - db
+         - wordpress
+    restart: always
+    volumes:
+        - wp_data:/var/www/
+    ports:
+        - 443:443
+    networks:
+        - docker-network
+
+  adminer:
+    build:
+        context: ./bonus/adminer/
+        dockerfile: Dockerfile
+    image: adminer
+    container_name: adminer_container
+    depends_on:
+        - db
+        - wordpress
+    restart: always
+    volumes:
+        - db_data:/var/lib/mysql
+        - wp_data:/var/www
+    networks:
+        - docker-network
+
+  redis:
+    build:
+        context: ./bonus/redis/
+        dockerfile: Dockerfile
+    image: redis
+    container_name: redis_container
+    depends_on:
+        - nginx
+        - wordpress
+        - db
+    restart: always
+    volumes:
+        - wp_data:/var/www
+    networks:
+        - docker-network
+
+  ftp:
+    build:
+        context: ./bonus/vsftpd
+        dockerfile: Dockerfile
+    image: ftp
+    container_name: ftp_container
+    restart: always
+    depends_on:
+      - wordpress
+      - db
+      - nginx
+    volumes:
+        - wp_data:/var/ftp:ro
+    ports:
+        - 20-21:20-21
+        - 65500-65515:65500-65515
+    networks:
+        - docker-network
+
+  borg:
+    build:
+        context: ./bonus/borg_backup
+        dockerfile: Dockerfile
+    image: borg
+    container_name: borg_container
+    restart: always
+    env_file: .env
+    depends_on:
+        - db
+        - wordpress
+        - nginx
+    volumes:
+        - wp_data:/var/www/
+    networks:
+        - docker-network
+
+  nginx_bonus:
+    build:
+        context: ./bonus/website
+        dockerfile: Dockerfile
+    image: nginx_bonus
+    container_name: website_container
+    restart: always
+    ports:
+        - 80:80
+    networks:
+        - docker-network
+
+volumes:
+  wp_data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/mstrantz/data/www'
+  db_data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/mstrantz/data/mysql'

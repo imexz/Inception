@@ -1,0 +1,239 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.wrapper {
+    width: 1024px;
+    margin: 0 auto;
+    font-family: "Roboto Condensed", sans-serif;
+    box-shadow: 1px 18px 18px -5px rgba(0, 0, 0, 0.3);
+}
+
+p {
+    font-size: 16px;
+    color: #07050d;
+    line-height: 2;
+    margin: 24px 0;
+}
+
+/* Header - Navigation */
+
+header {
+    height: 100vh;
+    background: #07050d;
+    overflow: hidden;
+}
+
+header nav {
+    background:  #fdfdfd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    
+    position: fixed;
+    top: 0;
+    width: 1024px;
+    z-index: 200;
+    box-shadow: 0 2px 10px -3px rgba(0, 0, 0, 0.2);
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+
+}
+
+header nav ul li {
+    margin: 0 24px;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #07050d;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 18px;  
+}
+
+/* Header - Hero */
+
+header .hero-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 76px;
+    height: 100%;
+}
+
+header .hero-container .left {
+    flex: 1;
+    margin-left: 100px;
+}
+
+header .hero-container .left p.i-am {
+    font-size: 24px;
+    color: #fdfdfd;
+    margin: 0;
+}
+
+header .hero-container .left h2 {
+    font-size: 64px;
+    color: #fdfdfd;
+    text-transform: uppercase;
+}
+
+header .hero-container .left h2:nth-of-type(2) {
+    margin-left: 20px;
+}
+
+.btn {
+    background-color: #ff4d4d;
+    text-decoration: none;
+    color: #07050d;
+    margin: 16px 0;
+    display: inline-block;
+    padding: 12px 32px;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.btn.light {
+    color: #fdfdfd;
+
+}
+
+.hero-container .left .btn {
+    margin-left: 20px;
+}
+
+.hero-container .left .social-icons img {
+    margin: 16px 20px;
+    height: 40px;
+}
+
+.hero-container .right img {
+    height: 580px;
+}
+
+/* Section */
+
+section {
+    padding: 100px 50px;
+}
+
+section .section-content {
+    margin-left: 200px;
+}
+
+section h2 {
+    transform: rotate(-90deg);
+    position: absolute;
+    color: #cacaca;
+    font-size: 54px;
+    margin-top: 80px;
+}
+
+section h2::after {
+    content: "";
+    height: 10px;
+    width: 80px;
+    display: block;
+    background: #ff4d4d;
+    right: 0;
+    position: absolute;
+}
+
+section .section-content p:first-of-type {
+    margin: 0;
+}
+
+/* Work Section */
+
+section .work-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+/* Testimonials Section */
+
+.testimonials-section {
+    background: #07050d;
+    color: #fdfdfd;
+    display: flex;
+    position: relative;
+    align-items:  center;
+    padding: 65px 120px 50px 120px;
+}
+
+.testimonials-section p {
+    color: #fdfdfd;
+    padding: 0 24px;
+}
+
+.testimonials-section .says img {
+    border-radius:  24px;
+    transform: rotate(-4deg);
+}
+
+.testimonials-section .says h3 {
+    margin-top: 36px;
+    font-size: 24px;
+    margin-left: 24px;
+    color: #ff4d4d;
+}
+
+.testimonials-section .says .company-name {
+    margin-top: 0;
+    color: #ff4d4d;
+}
+
+.testimonials-section .testimonial-text {
+    padding-left: 100px;
+    padding-right: 48px;
+    font-size: 20px;
+}
+
+.testimonials-section .quote-icon {
+    opacity: 0.5;
+    position: absolute;
+    top: 72px;
+    left: 95px;   
+}
+
+/* Contact Section */
+
+section .email,
+section .phone,
+section .address {
+    display: flex;
+    align-items: center;
+    margin: 16px 24px;
+}
+
+section .contact-text {
+    margin-left: 40px;
+}
+
+/* Footer */
+
+footer {
+    background: #07050d;
+    color: #fdfdfd;
+    padding: 48px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Additional Styles */
+
+#testimonials {
+    margin-bottom: 76px;
+}
